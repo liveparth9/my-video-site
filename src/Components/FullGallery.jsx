@@ -11,9 +11,12 @@ const allVideos = [
   { id: 6, title: "English reel", embed: "https://www.youtube.com/embed/ZEPcTwAEolI" },
   { id: 7, title: "Zomato", embed: "https://youtube.com/embed/-4ts2Iw22jQ" },
   { id: 8, title: "Storytelling", embed: "https://www.youtube.com/embed/mnDZjAh71d0" },
-  { id: 9, title: "Thumbnail showcase", embed: "https://www.youtube.com/embed/cialL3AhrEE" },
-  { id: 10, title: "Gaming Video", embed: "https://www.youtube.com/embed/AjQvaJV8HUQ" },
-  { id: 11, title: "Podcast", embed: "https://www.youtube.com/embed/vstLbV4T3-4" },
+  { id: 9, title: "Podcast Reel", embed: "https://youtube.com/embed/ghTeiCk8bXs" },
+  { id: 10, title: "Thumbnail showcase", embed: "https://www.youtube.com/embed/cialL3AhrEE" },
+  { id: 11, title: "Gaming Video", embed: "https://www.youtube.com/embed/AjQvaJV8HUQ" },
+  { id: 12, title: "Podcast", embed: "https://www.youtube.com/embed/vstLbV4T3-4" },
+  { id: 13, title: "Podcast 2", embed: "https://www.youtube.com/embed/8QbCZO089zU" },
+  { id: 14, title: "Typography", embed: "https://www.youtube.com/embed/GlcNCW9BapA" },
 ];
 
 const FullGallery = () => {

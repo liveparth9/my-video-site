@@ -1,22 +1,25 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "./Navbar";
+
 const allVideos = [
-  { id: 1, title: "Creative Short Film", embed: "https://www.youtube.com/embed/tgbNymZ7vqY" },
-  { id: 2, title: "Cinematic Story", embed: "https://www.youtube.com/embed/oHg5SJYRHA0" },
-  { id: 3, title: "Visual Effects Showcase", embed: "https://www.youtube.com/embed/ysz5S6PUM-U" },
-  { id: 4, title: "Gaming Montage", embed: "https://www.youtube.com/embed/ScMzIvxBSi4" },
-  { id: 5, title: "Color Grading Reel", embed: "https://www.youtube.com/embed/aqz-KE-bpKQ" },
-  { id: 6, title: "Slow Motion Edit", embed: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-  { id: 7, title: "Action Trailer", embed: "https://www.youtube.com/embed/M7lc1UVf-VE" },
-  { id: 8, title: "Drone Cinematics", embed: "https://www.youtube.com/embed/e-ORhEE9VVg" },
-  { id: 9, title: "Music Video Cut", embed: "https://www.youtube.com/embed/2Vv-BfVoq4g" },
+  { id: 1, title: "AdityaXsoon", embed: "https://www.youtube.com/embed/2wkLrhc6XnE" },
+  { id: 2, title: "Forhead reel", embed: "https://www.youtube.com/embed/K_sgxh5xgDk" },
+  { id: 3, title: "3D REEL", embed: "https://www.youtube.com/embed/zEtnm5S-PNs" },
+  { id: 4, title: "Trading", embed: "https://www.youtube.com/embed/V56wc9k-bwI" },
+  { id: 5, title: "Trading 2", embed: "https://www.youtube.com/embed/_HOfxzDoAX0" },
+  { id: 6, title: "English reel", embed: "https://www.youtube.com/embed/ZEPcTwAEolI" },
+  { id: 7, title: "Zomato", embed: "https://youtube.com/embed/-4ts2Iw22jQ" },
+  { id: 8, title: "Storytelling", embed: "https://www.youtube.com/embed/mnDZjAh71d0" },
+  { id: 9, title: "Thumbnail showcase", embed: "https://www.youtube.com/embed/cialL3AhrEE" },
+  { id: 10, title: "Gaming Video", embed: "https://www.youtube.com/embed/AjQvaJV8HUQ" },
+  { id: 11, title: "Podcast", embed: "https://www.youtube.com/embed/vstLbV4T3-4" },
 ];
 
 const FullGallery = () => {
   return (
     <div
-      className="min-h-screen text-white"
+      className="min-h-screen text-white relative overflow-hidden"
       style={{
         background: "radial-gradient(circle at top right, #14182a 0%, #0c0f1c 70%)",
       }}
@@ -24,22 +27,20 @@ const FullGallery = () => {
       <Navbar />
 
       {/* Page Title */}
-      <section className="pt-28 px-6 md:px-20">
+      <section className="pt-28 px-6 md:px-20 relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.37, 0, 0.63, 1] }}
+          transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }} // smoother ease
           className="text-5xl font-extrabold text-center mb-16"
         >
           All{" "}
           <motion.span
-            initial={{ backgroundPositionX: "0%" }}
-            animate={{ backgroundPositionX: "200%" }}
+            animate={{ backgroundPositionX: ["0%", "200%"] }}
             transition={{
-              duration: 3,
+              duration: 5,
               repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut",
+              ease: "linear",
             }}
             className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 bg-[length:200%_auto]"
           >
@@ -47,39 +48,33 @@ const FullGallery = () => {
           </motion.span>
         </motion.h1>
 
-        {/* Animated Video Grid */}
+        {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {allVideos.map((video, i) => (
             <motion.div
               key={video.id}
               initial={{ opacity: 0, y: 80 }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 1,
-                delay: i * 0.1,
-                ease: [0.37, 0, 0.63, 1],
+                duration: 1.2,
+                delay: i * 0.08,
+                ease: [0.25, 1, 0.5, 1],
               }}
-              viewport={{ once: false, amount: 0.3 }}
-              className="bg-[#1b1e2f] rounded-2xl overflow-hidden shadow-lg 
-                         hover:shadow-[0_0_25px_#a855f7]/40 
-                         transition-all duration-500 hover:scale-[1.03]
-                         relative"
+              viewport={{ once: false, amount: 0.2 }}
               whileHover={{
-                y: -8,
-                transition: { duration: 0.5, ease: [0.37, 0, 0.63, 1] },
+                scale: 1.05,
+                y: -6,
+                transition: { duration: 0.4, ease: [0.25, 1, 0.5, 1] },
               }}
+              className="bg-[#1b1e2f] rounded-2xl overflow-hidden shadow-lg 
+                         hover:shadow-[0_0_25px_#a855f7]/40 transition-all duration-500
+                         relative"
             >
-              {/* Subtle Floating (sine-like breathing effect) */}
               <motion.div
-                animate={{
-                  y: [0, -5, 0],
-                }}
+                animate={{ y: [0, -4, 0] }}
                 transition={{
                   repeat: Infinity,
-                  duration: 4 + (i % 2),
+                  duration: 5 + (i % 3),
                   ease: "easeInOut",
                 }}
               >
@@ -94,23 +89,22 @@ const FullGallery = () => {
               </motion.div>
 
               {/* Title */}
-              <div className="p-4 text-center">
-                <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  viewport={{ once: true }}
-                  className="text-lg font-semibold"
-                >
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="p-4 text-center"
+              >
+                <h3 className="text-lg font-semibold tracking-wide text-gray-200 hover:text-purple-400 transition-colors duration-300">
                   {video.title}
-                </motion.h3>
-              </div>
+                </h3>
+              </motion.div>
             </motion.div>
           ))}
         </div>
 
-        {/* Soft background glow */}
-        <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] -translate-x-1/2 -translate-y-1/2 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        {/* Subtle Background Glow */}
+        <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px] -translate-x-1/2 -translate-y-1/2 bg-purple-500/10 rounded-full blur-[180px] pointer-events-none"></div>
       </section>
     </div>
   );

@@ -5,16 +5,18 @@ import { useNavigate } from "react-router-dom";
 const MyGallery = () => {
   const navigate = useNavigate();
 
-  const videos = [
-    { id: 1, title: "Creative Short Film", embed: "https://www.youtube.com/embed/tgbNymZ7vqY" },
-    { id: 2, title: "Cinematic Story", embed: "https://www.youtube.com/embed/oHg5SJYRHA0" },
-    { id: 3, title: "Visual Effects Showcase", embed: "https://www.youtube.com/embed/ysz5S6PUM-U" },
-    { id: 4, title: "Gaming Montage", embed: "https://www.youtube.com/embed/ScMzIvxBSi4" },
-    { id: 5, title: "Color Grading Reel", embed: "https://www.youtube.com/embed/aqz-KE-bpKQ" },
-    { id: 6, title: "Slow Motion Edit", embed: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-  ];
+  // ✅ All links converted to EMBED format (required for iframes)
+const videos = [
+  { id: 1, title: "AdityaXSoon", embed: "https://www.youtube.com/embed/2wkLrhc6XnE" },
+  { id: 2, title: "Forhead Reel", embed: "https://www.youtube.com/embed/K_sgxh5xgDk" },
+  { id: 3, title: "3D REEL", embed: "https://www.youtube.com/embed/zEtnm5S-PNs" },
+  { id: 4, title: "Gaming Video", embed: "https://www.youtube.com/embed/AjQvaJV8HUQ" },
+  { id: 5, title: "Thumbnail Showcase", embed: "https://www.youtube.com/embed/cialL3AhrEE" },
+  { id: 6, title: "English reel", embed: "https://www.youtube.com/embed/ZEPcTwAEolI" }
+];
 
-  // Reusable animation variants
+
+  // 🎬 Animation variant
   const fadeUpSine = {
     hidden: { opacity: 0, y: 60 },
     visible: (i) => ({
@@ -23,7 +25,7 @@ const MyGallery = () => {
       transition: {
         duration: 1.1,
         delay: i * 0.1,
-        ease: [0.37, 0, 0.63, 1], // smooth sine-like easing
+        ease: [0.37, 0, 0.63, 1],
       },
     }),
   };
@@ -35,7 +37,7 @@ const MyGallery = () => {
         background: "radial-gradient(circle at top right, #14182a 0%, #0c0f1c 70%)",
       }}
     >
-      {/* Title Section */}
+      {/* 🎨 Title Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +50,12 @@ const MyGallery = () => {
           <motion.span
             initial={{ backgroundPositionX: "0%" }}
             whileInView={{ backgroundPositionX: "100%" }}
-            transition={{ duration: 2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
             className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 bg-[length:200%_auto]"
           >
             Gallery
@@ -64,7 +71,7 @@ const MyGallery = () => {
         </motion.p>
       </motion.div>
 
-      {/* Videos Grid */}
+      {/* 🎥 Video Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
         {videos.map((video, i) => (
           <motion.div
@@ -83,18 +90,21 @@ const MyGallery = () => {
               transition: { duration: 0.4, ease: [0.37, 0, 0.63, 1] },
             }}
           >
-            <motion.iframe
-              width="100%"
-              height="240"
-              src={video.embed}
-              title={video.title}
-              className="rounded-t-2xl"
-              allowFullScreen
-              whileHover={{
-                scale: 1.03,
-                transition: { duration: 0.5, ease: [0.37, 0, 0.63, 1] },
-              }}
-            ></motion.iframe>
+            {/* 🎬 Video Embed */}
+            <motion.div
+              className="aspect-video w-full"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5, ease: [0.37, 0, 0.63, 1] }}
+            >
+              <iframe
+                src={video.embed}
+                title={video.title}
+                allowFullScreen
+                className="w-full h-full rounded-t-2xl"
+              ></iframe>
+            </motion.div>
+
+            {/* 🏷 Title */}
             <div className="p-4 text-center">
               <motion.h3
                 initial={{ opacity: 0, y: 10 }}
@@ -109,7 +119,7 @@ const MyGallery = () => {
         ))}
       </div>
 
-      {/* Show More Button */}
+      {/* 🚀 Show More Button */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

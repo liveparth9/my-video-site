@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Link as ScrollLink, scroller } from "react-scroll";
+import { useLocation, useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -12,15 +12,21 @@ export default function Navbar() {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closePopup = () => setShowPopup(false);
 
-  // all navbar links
+  // All navbar links
   const navItems = ["Home", "About", "Skills", "Gallery", "Services", "Stats", "Contact"];
 
-  // handle link click - works both in home and gallery page
+  // Handle link click - works both in home and gallery page
   const handleNavClick = (item) => {
     const section = item.toLowerCase();
     setMenuOpen(false);
 
-    // if already on home page
+    if (section === "gallery") {
+      // Open Full Gallery Page
+      navigate("/gallery");
+      return;
+    }
+
+    // If already on home page, just scroll
     if (location.pathname === "/") {
       scroller.scrollTo(section, {
         smooth: true,
@@ -28,7 +34,7 @@ export default function Navbar() {
         offset: -70,
       });
     } else {
-      // navigate to home and scroll after navigation
+      // Navigate to home and scroll after delay
       navigate("/");
       setTimeout(() => {
         scroller.scrollTo(section, {
@@ -78,9 +84,7 @@ export default function Navbar() {
               Hire Me
             </button>
             <button
-              onClick={() =>
-                window.open("https://www.youtube.com/embed/zEtnm5S-PNs", "_blank")
-              }
+              onClick={() => navigate("/gallery")}
               className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-5 py-2 rounded-full transition duration-200"
             >
               Watch Reel
@@ -118,9 +122,10 @@ export default function Navbar() {
               Hire Me
             </button>
             <button
-              onClick={() =>
-                window.open("https://www.youtube.com/embed/zEtnm5S-PNs", "_blank")
-              }
+              onClick={() => {
+                navigate("/gallery");
+                setMenuOpen(false);
+              }}
               className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-5 py-2 rounded-full transition duration-200"
             >
               Watch Reel

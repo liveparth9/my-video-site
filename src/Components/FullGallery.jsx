@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom"; // ✅ Add for Home redirect
 
 const allVideos = [
   { id: 1, title: "AdityaXsoon", embed: "https://www.youtube.com/embed/2wkLrhc6XnE" },
@@ -29,13 +30,23 @@ const FullGallery = () => {
     >
       <Navbar />
 
-      {/* Page Title */}
-      <section className="pt-28 px-6 md:px-20 relative z-10">
+      {/* === Back to Home Button (Visible on Mobile) === */}
+      <div className="absolute top-24 left-5 z-40 md:hidden">
+        <Link
+          to="/"
+          className="bg-purple-600/80 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-700 transition-all duration-300"
+        >
+          ← Home
+        </Link>
+      </div>
+
+      {/* === Page Title === */}
+      <section className="pt-28 px-4 sm:px-6 md:px-20 relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }} // smoother ease
-          className="text-5xl font-extrabold text-center mb-16"
+          transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-10 sm:mb-16"
         >
           All{" "}
           <motion.span
@@ -51,8 +62,8 @@ const FullGallery = () => {
           </motion.span>
         </motion.h1>
 
-        {/* Video Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        {/* === Responsive Video Grid === */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 max-w-6xl mx-auto">
           {allVideos.map((video, i) => (
             <motion.div
               key={video.id}
@@ -63,7 +74,7 @@ const FullGallery = () => {
                 delay: i * 0.08,
                 ease: [0.25, 1, 0.5, 1],
               }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               whileHover={{
                 scale: 1.05,
                 y: -6,
@@ -83,10 +94,10 @@ const FullGallery = () => {
               >
                 <iframe
                   width="100%"
-                  height="240"
+                  height="220"
                   src={video.embed}
                   title={video.title}
-                  className="rounded-t-2xl"
+                  className="rounded-t-2xl sm:h-[240px] md:h-[260px]"
                   allowFullScreen
                 ></iframe>
               </motion.div>
@@ -98,7 +109,7 @@ const FullGallery = () => {
                 transition={{ delay: 0.2, duration: 0.8 }}
                 className="p-4 text-center"
               >
-                <h3 className="text-lg font-semibold tracking-wide text-gray-200 hover:text-purple-400 transition-colors duration-300">
+                <h3 className="text-base sm:text-lg font-semibold tracking-wide text-gray-200 hover:text-purple-400 transition-colors duration-300">
                   {video.title}
                 </h3>
               </motion.div>
@@ -106,8 +117,8 @@ const FullGallery = () => {
           ))}
         </div>
 
-        {/* Subtle Background Glow */}
-        <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px] -translate-x-1/2 -translate-y-1/2 bg-purple-500/10 rounded-full blur-[180px] pointer-events-none"></div>
+        {/* === Background Glow === */}
+        <div className="absolute top-1/2 left-1/2 w-[600px] sm:w-[800px] md:w-[900px] h-[600px] sm:h-[800px] md:h-[900px] -translate-x-1/2 -translate-y-1/2 bg-purple-500/10 rounded-full blur-[180px] pointer-events-none"></div>
       </section>
     </div>
   );

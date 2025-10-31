@@ -1,32 +1,54 @@
 import React, { useState } from "react";
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link as ScrollLink, scroller } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closePopup = () => setShowPopup(false);
 
-  const navItems = [
-    { name: "Home", id: "home" },
-    { name: "About", id: "about" },
-    { name: "Skills", id: "skills" },
-    { name: "Gallery", id: "gallery" },
-    { name: "Services", id: "services" },
-    { name: "Stats", id: "stats" },
-    { name: "Contact", id: "contact" },
-  ];
+  // all navbar links
+  const navItems = ["Home", "About", "Skills", "Gallery", "Services", "Stats", "Contact"];
+
+  // handle link click - works both in home and gallery page
+  const handleNavClick = (item) => {
+    const section = item.toLowerCase();
+    setMenuOpen(false);
+
+    // if already on home page
+    if (location.pathname === "/") {
+      scroller.scrollTo(section, {
+        smooth: true,
+        duration: 500,
+        offset: -70,
+      });
+    } else {
+      // navigate to home and scroll after navigation
+      navigate("/");
+      setTimeout(() => {
+        scroller.scrollTo(section, {
+          smooth: true,
+          duration: 500,
+          offset: -70,
+        });
+      }, 500);
+    }
+  };
 
   return (
     <>
+      {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-[#0f1420]/95 backdrop-blur-sm text-white shadow-md z-50">
         <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
           {/* Logo */}
           <div
+            onClick={() => handleNavClick("home")}
             className="flex items-center space-x-2 cursor-pointer"
-            onClick={() => scroll.scrollToTop({ duration: 600, smooth: true })}
           >
             <h1 className="text-xl font-bold relative select-none">
               Edit with <span className="text-purple-400">Fox</span>
@@ -37,31 +59,17 @@ export default function Navbar() {
           {/* Desktop Links */}
           <ul className="hidden md:flex space-x-8 text-sm font-medium">
             {navItems.map((item) => (
-              <li key={item.id}>
-                {item.id === "home" ? (
-                  <button
-                    onClick={() => scroll.scrollToTop({ duration: 600, smooth: true })}
-                    className="cursor-pointer text-gray-300 hover:text-purple-400 transition-colors duration-200"
-                  >
-                    {item.name}
-                  </button>
-                ) : (
-                  <Link
-                    to={item.id}
-                    smooth={true}
-                    duration={600}
-                    offset={-70}
-                    spy={true}
-                    className="cursor-pointer text-gray-300 hover:text-purple-400 transition-colors duration-200"
-                  >
-                    {item.name}
-                  </Link>
-                )}
+              <li
+                key={item}
+                onClick={() => handleNavClick(item)}
+                className="cursor-pointer text-gray-300 hover:text-purple-400 transition-colors duration-200"
+              >
+                {item}
               </li>
             ))}
           </ul>
 
-          {/* Buttons */}
+          {/* Desktop Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => setShowPopup(true)}
@@ -70,7 +78,9 @@ export default function Navbar() {
               Hire Me
             </button>
             <button
-              onClick={() => window.open("https://www.youtube.com/embed/zEtnm5S-PNs", "_blank")}
+              onClick={() =>
+                window.open("https://www.youtube.com/embed/zEtnm5S-PNs", "_blank")
+              }
               className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-5 py-2 rounded-full transition duration-200"
             >
               Watch Reel
@@ -89,33 +99,15 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden bg-[#141a29] px-8 py-4 flex flex-col space-y-4 text-center border-t border-gray-800">
-            {navItems.map((item) =>
-              item.id === "home" ? (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    scroll.scrollToTop({ duration: 600, smooth: true });
-                    setMenuOpen(false);
-                  }}
-                  className="cursor-pointer text-gray-300 hover:text-purple-400 transition-colors duration-200"
-                >
-                  {item.name}
-                </button>
-              ) : (
-                <Link
-                  key={item.id}
-                  to={item.id}
-                  smooth={true}
-                  duration={600}
-                  offset={-70}
-                  onClick={() => setMenuOpen(false)}
-                  className="cursor-pointer text-gray-300 hover:text-purple-400 transition-colors duration-200"
-                >
-                  {item.name}
-                </Link>
-              )
-            )}
-
+            {navItems.map((item) => (
+              <div
+                key={item}
+                onClick={() => handleNavClick(item)}
+                className="cursor-pointer text-gray-300 hover:text-purple-400 transition-colors duration-200"
+              >
+                {item}
+              </div>
+            ))}
             <button
               onClick={() => {
                 setShowPopup(true);
@@ -125,7 +117,6 @@ export default function Navbar() {
             >
               Hire Me
             </button>
-
             <button
               onClick={() =>
                 window.open("https://www.youtube.com/embed/zEtnm5S-PNs", "_blank")
@@ -138,7 +129,7 @@ export default function Navbar() {
         )}
       </nav>
 
-      {/* Popup */}
+      {/* Hire Me Popup */}
       <AnimatePresence>
         {showPopup && (
           <motion.div

@@ -15,56 +15,39 @@ function App() {
   return (
     <div className="bg-[#0f1420] text-white min-h-screen">
       <Routes>
-        {/* === MAIN SINGLE PAGE === */}
         <Route
           path="/"
           element={
             <>
               <Navbar />
-
               <section id="home">
                 <Hero />
               </section>
-
               <section id="about">
                 <About />
               </section>
-
               <section id="skills">
                 <SkillsSection />
               </section>
-
               <section id="gallery">
                 <MyGallery />
               </section>
-
               <section id="services">
                 <Services />
               </section>
-
               <section id="stats">
                 <StatsSection />
               </section>
-
               <section id="contact">
                 <ContactSection />
               </section>
-
               <Footer />
             </>
           }
         />
 
-        {/* === FULL GALLERY PAGE === */}
-        <Route
-          path="/gallery"
-          element={
-            <>
-              <Navbar />
-              <FullGallery />
-            </>
-          }
-        />
+        {/* FULL GALLERY PAGE */}
+        <Route path="/gallery" element={<FullGallery />} />
       </Routes>
     </div>
   );

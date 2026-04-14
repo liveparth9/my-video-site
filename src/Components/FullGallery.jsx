@@ -18,6 +18,10 @@ const allVideos = [
   { id: 12, title: "Podcast", embed: "https://www.youtube.com/embed/vstLbV4T3-4" },
   { id: 13, title: "Podcast 2", embed: "https://www.youtube.com/embed/8QbCZO089zU" },
   { id: 14, title: "Typography", embed: "https://www.youtube.com/embed/GlcNCW9BapA" },
+  { id: 15, title: "Motion Graphics", embed: "https://www.youtube.com/embed/X1EPCD80OvM" },
+  { id: 16, title: "Apple Ui Animation ", embed: "https://www.youtube.com/embed/79dNQ0OfUVs" },
+  { id: 17, title: "SAAS Explaner AD ", embed: "https://www.youtube.com/embed/ISyCb1018Iw" },
+  { id: 18, title: "SAAS Explaner AD 1", embed: "https://www.youtube.com/embed/a6P0y_JpOA0" }
 ];
 
 const FullGallery = () => {
